@@ -8,6 +8,9 @@ import ec.edu.ups.edu.practica05_interface.test.controlador.CantanteControlador;
 import ec.edu.ups.edu.practica05_interface.test.controlador.CompositorControlador;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Cantante;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Compositor;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -252,8 +255,7 @@ public class VentanaCrearCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
-        if (comprobarSeleccion()) {
+if (comprobarSeleccion()) {
             Compositor compositor = cargarCompositorSeleccionado();
             Cantante cantante = cargarCantanteSeleccionado();
 
@@ -262,20 +264,21 @@ public class VentanaCrearCliente extends javax.swing.JInternalFrame {
             Cantante cantanteValidacion = controladorCompositor.buscarCantante(compositor, codigo);
             if (cantanteValidacion == null) {
                 controladorCompositor.agregarCliente(compositor, cantante);
-                 JOptionPane.showMessageDialog(this, mensajes.getString("mensajeCreado"));
+                guardarCliente(compositor, cantante); // Guardar en el archivo "clientes.dat"
+                JOptionPane.showMessageDialog(this, mensajes.getString("mensajeCreado"));
                 tblCantante.clearSelection();
                 tblCompositor.clearSelection();
             } else {
-                JOptionPane.showMessageDialog(this, " no  :( ");
+                JOptionPane.showMessageDialog(this, "No :(");
                 tblCantante.clearSelection();
             }
         } else {
             if (tblCompositor.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(this, "No :( ");
+                JOptionPane.showMessageDialog(this, ":().");
             } else if (tblCantante.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(this, "No :( ");
+                JOptionPane.showMessageDialog(this, ":().");
             } else {
-                JOptionPane.showMessageDialog(this, "No :( ");
+                JOptionPane.showMessageDialog(this, "Seleccione un compositor y un cantante.");
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -327,8 +330,6 @@ public class VentanaCrearCliente extends javax.swing.JInternalFrame {
         tblCantante.setModel(modelo);
     }
 
-   
-
     private Cantante cargarCantanteSeleccionado() {
         int fila = tblCantante.getSelectedRow();
         int codigo = Integer.parseInt(tblCantante.getValueAt(fila, 0).toString());
@@ -347,10 +348,21 @@ public class VentanaCrearCliente extends javax.swing.JInternalFrame {
 
     private boolean comprobarSeleccion() {
         if (tblCompositor.getSelectedRow() == -1 || tblCantante.getSelectedRow() == -1) {
-
             return false;
         } else {
             return true;
+        }
+    }
+    
+    private void guardarCliente(Compositor compositor, Cantante cantante) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("clientes.dat", true))) {
+            writer.write("Compositor: " + compositor.getNombre() + " " + compositor.getApellido());
+            writer.newLine();
+            writer.write("Cantante: " + cantante.getNombre() + " " + cantante.getApellido());
+            writer.newLine();
+            writer.newLine();
+        } catch (IOException e) {
+            System.err.println("Error al escribir en el archivo: " + e.getMessage());
         }
     }
 

@@ -336,7 +336,7 @@ public class VentanaActualizarCliente extends javax.swing.JInternalFrame {
         cargarClientes();
     }//GEN-LAST:event_tblCompositorMouseClicked
 
-    private void cargarCompositor() {
+     private void cargarCompositor() {
         DefaultTableModel modelo = (DefaultTableModel) tblCompositor.getModel();
         modelo.setNumRows(0);
         List<Compositor> listaCompositors = controladorCompositor.Listar();
@@ -350,7 +350,6 @@ public class VentanaActualizarCliente extends javax.swing.JInternalFrame {
             String numComposiciones = String.valueOf(compositor.getNumeroDeComposiciones());
             Object[] rowData = {codigo, nombre, apellido, edad, nacionalidad, salario, numComposiciones};
             modelo.addRow(rowData);
-
         }
         tblCompositor.setModel(modelo);
     }
@@ -419,7 +418,6 @@ public class VentanaActualizarCliente extends javax.swing.JInternalFrame {
         int codigo = Integer.parseInt(tblCantante.getValueAt(fila, 0).toString());
         Cantante cantante = controladorCantante.buscar(codigo);
         return cantante;
-
     }
 
     private Cantante cargarClienteSeleccionado() {
@@ -434,17 +432,16 @@ public class VentanaActualizarCliente extends javax.swing.JInternalFrame {
         int codigo = Integer.parseInt(tblCompositor.getValueAt(fila, 0).toString());
         Compositor compositor = controladorCompositor.buscar(codigo);
         return compositor;
-
     }
 
     private boolean comprobarSeleccion() {
         if (tblCompositor.getSelectedRow() == -1 || tblCantante.getSelectedRow() == -1 || tblClientes.getSelectedRow() == -1) {
-
             return false;
         } else {
             return true;
         }
-    }
+        }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
