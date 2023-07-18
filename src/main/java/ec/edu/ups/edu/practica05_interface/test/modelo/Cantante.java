@@ -3,17 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ec.edu.ups.edu.practica05_interface.test.modelo;
+import java.io.Serializable;
 import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Cantante extends Persona {
+public class Cantante extends Persona{
     private String nombreArtistico;
     private String generoMusical;
     private int numeroDeSencillos;
-    private int numeroDeConciertos;
     private int numeroDeGiras;
     private List<Disco> discografia;
     private Double salarioFinal;
@@ -25,15 +25,37 @@ public Cantante(int codigo, String nombre, String apellido, int edad, String nac
     this.nombreArtistico = nombreArtistico;
     this.generoMusical = generoMusical;
     this.numeroDeSencillos = 0;
-    this.numeroDeConciertos = 0;
     this.numeroDeGiras = 0;
     this.salarioFinal = salarioFinal; 
     this.discografia = new ArrayList<>();
 }
 
+    public Cantante(String nombreArtistico, String generoMusical, int numeroDeSencillos, int numeroDeGiras, List<Disco> discografia, Double salarioFinal, int codigo, String nombre, String apellido, int edad, String nacionalidad, double salario) {
+        super(codigo, nombre, apellido, edad, nacionalidad, salario);
+        this.nombreArtistico = nombreArtistico;
+        this.generoMusical = generoMusical;
+        this.numeroDeSencillos = numeroDeSencillos;
+        this.numeroDeGiras = numeroDeGiras;
+        this.discografia = discografia;
+        this.salarioFinal = salarioFinal;
+    }
+
+    public Cantante(String nombreArtistico, String generoMusical, int numeroDeSencillos, int numeroDeGiras, Double salarioFinal, int codigo, String nombre, String apellido, int edad, String nacionalidad, double salario) {
+        super(codigo, nombre, apellido, edad, nacionalidad, salario);
+        this.nombreArtistico = nombreArtistico;
+        this.generoMusical = generoMusical;
+        this.numeroDeSencillos = numeroDeSencillos;
+        this.numeroDeGiras = numeroDeGiras;
+        this.salarioFinal = salarioFinal;
+    }
+
+    
+    
     public Cantante() {
         discografia = new ArrayList<>();
     }
+
+    
 
     public Double getSalarioFinal() {
         return salarioFinal;
@@ -69,13 +91,6 @@ public void setSalarioFinal(double salarioFinal1) {
         this.numeroDeSencillos = numeroDeSencillos;
     }
 
-    public int getNumeroDeConciertos() {
-        return numeroDeConciertos;
-    }
-
-    public void setNumeroDeConciertos(int numeroDeConciertos) {
-        this.numeroDeConciertos = numeroDeConciertos;
-    }
 
     public int getNumeroDeGiras() {
         return numeroDeGiras;
@@ -162,9 +177,6 @@ public void setSalarioFinal(double salarioFinal1) {
         if (this.numeroDeSencillos != other.numeroDeSencillos) {
             return false;
         }
-        if (this.numeroDeConciertos != other.numeroDeConciertos) {
-            return false;
-        }
         if (this.numeroDeGiras != other.numeroDeGiras) {
             return false;
         }
@@ -214,7 +226,7 @@ public void setSalarioFinal(double salarioFinal1) {
     }   
     @Override
     public String toString() {
-        return "Cantante{" + "nombreArtistico=" + nombreArtistico + ", generoMusical=" + generoMusical + ", numeroDeSencillos=" + numeroDeSencillos + ", numeroDeConciertos=" + numeroDeConciertos + ", numeroDeGiras=" + numeroDeGiras + ", discografia=" + discografia + ", salarioFinal=" + salarioFinal + '}';
+        return "Cantante{" + "nombreArtistico=" + nombreArtistico + ", generoMusical=" + generoMusical + ", numeroDeSencillos=" + numeroDeSencillos + ", numeroDeGiras=" + numeroDeGiras + ", discografia=" + discografia + ", salarioFinal=" + salarioFinal + '}';
     }
     
     

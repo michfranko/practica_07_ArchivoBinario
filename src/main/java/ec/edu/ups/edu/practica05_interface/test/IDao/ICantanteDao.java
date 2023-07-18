@@ -20,7 +20,7 @@ public interface ICantanteDao {
     public void update(Cantante cantante);
     public void delete(int codigo);
     public List<Cantante> list();
-    
+   
    public void createDisco (Cantante cantante, int codigo, String nombre, int anioDeLanzamiento);
     public Disco readDisco(Cantante cantante, int codigo);
     public void updateDisco(Cantante cantante, int codigo, String nombre, int anioDeLanzamiento);

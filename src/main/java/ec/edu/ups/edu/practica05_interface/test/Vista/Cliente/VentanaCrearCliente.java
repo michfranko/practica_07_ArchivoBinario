@@ -322,9 +322,8 @@ if (comprobarSeleccion()) {
             String nombreArtistico = cantante.getNombreArtistico();
             String generoMusical = cantante.getGeneroMusical();
             String numSencillos = String.valueOf(cantante.getNumeroDeSencillos());
-            String numConciertos = String.valueOf(cantante.getNumeroDeConciertos());
             String numGiras = String.valueOf(cantante.getNumeroDeGiras());
-            Object[] rowData = {codigo, nombre, apellido, edad, nacionalidad, salario, nombreArtistico, generoMusical, numSencillos, numConciertos, numGiras};
+            Object[] rowData = {codigo, nombre, apellido, edad, nacionalidad, salario, nombreArtistico, generoMusical, numSencillos, numGiras};
             modelo.addRow(rowData);
         }
         tblCantante.setModel(modelo);
@@ -355,7 +354,7 @@ if (comprobarSeleccion()) {
     }
     
     private void guardarCliente(Compositor compositor, Cantante cantante) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("clientes.dat", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Administración de Datos Musik UPS\\clientes.dat", true))) {
             writer.write("Compositor: " + compositor.getNombre() + " " + compositor.getApellido());
             writer.newLine();
             writer.write("Cantante: " + cantante.getNombre() + " " + cantante.getApellido());

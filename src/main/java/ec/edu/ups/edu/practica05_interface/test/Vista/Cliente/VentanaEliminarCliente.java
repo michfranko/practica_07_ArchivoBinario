@@ -309,9 +309,8 @@ public class VentanaEliminarCliente extends javax.swing.JInternalFrame {
             String nombreArtistico = cantante.getNombreArtistico();
             String generoMusical = cantante.getGeneroMusical();
             String numSencillos = String.valueOf(cantante.getNumeroDeSencillos());
-            String numConciertos = String.valueOf(cantante.getNumeroDeConciertos());
             String numGiras = String.valueOf(cantante.getNumeroDeGiras());
-            Object[] rowData = {codigo, nombre, apellido, edad, nacionalidad, salario, nombreArtistico, generoMusical, numSencillos, numConciertos, numGiras};
+            Object[] rowData = {codigo, nombre, apellido, edad, nacionalidad, salario, nombreArtistico, generoMusical, numSencillos, numGiras};
             modelo.addRow(rowData);
         }
         tblCantante.setModel(modelo);

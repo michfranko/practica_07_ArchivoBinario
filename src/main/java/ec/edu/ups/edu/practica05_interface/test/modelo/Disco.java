@@ -4,10 +4,11 @@
  */
 package ec.edu.ups.edu.practica05_interface.test.modelo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
-public class Disco {
+public class Disco{
     private int codigo;
     private String nombre;
     private int anioDeLanzamiento;

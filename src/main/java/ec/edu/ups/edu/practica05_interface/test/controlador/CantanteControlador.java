@@ -47,7 +47,7 @@ public class CantanteControlador {
     public List<Cantante> Listar (){
         return cantanteDAO.list();
     }
-    
+  
       public void ingresarDisco(Cantante cantante, int codigo, String nombre, int anioDeLanzamiento) {
         this.cantante = cantante;
 
@@ -88,6 +88,7 @@ public class CantanteControlador {
         this.cantante = cantante;
         return cantanteDAO.findAllDisco(this.cantante);
     }
+
     
 }
     
