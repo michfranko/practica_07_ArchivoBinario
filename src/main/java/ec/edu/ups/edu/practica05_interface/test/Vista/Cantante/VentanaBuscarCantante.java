@@ -233,6 +233,7 @@ public class VentanaBuscarCantante extends javax.swing.JInternalFrame {
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
             this.LimpiarCampos();
+            txtCodigo1.setEnabled(true);
         this.setVisible(false); 
     }//GEN-LAST:event_BtnCancelarActionPerformed
 

@@ -1358,9 +1358,9 @@ txtNacionalidad.setText("");
 txtGeneroMusical.setText("");
 txtSalario.setText("");
 txtCodigo.setText("");
-txtDiscos.setText("");
-txtGiras.setText("");
-txtSencillos.setText("");
+txtDiscos3.setText("");
+txtGiras3.setText("");
+txtSencillos3.setText("");
 txtSueldoFinal.setText("");
 }
 private void calcularSalarioFinal(Cantante singer) {

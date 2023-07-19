@@ -37,6 +37,7 @@ public Cantante(int codigo, String nombre, String apellido, int edad, String nac
         this.numeroDeSencillos = numeroDeSencillos;
         this.numeroDeGiras = numeroDeGiras;
         this.discografia = discografia;
+         this.discografia = new ArrayList<>(); 
         this.salarioFinal = salarioFinal;
     }
 
@@ -46,6 +47,7 @@ public Cantante(int codigo, String nombre, String apellido, int edad, String nac
         this.generoMusical = generoMusical;
         this.numeroDeSencillos = numeroDeSencillos;
         this.numeroDeGiras = numeroDeGiras;
+         this.discografia = new ArrayList<>(); 
         this.salarioFinal = salarioFinal;
     }
 
@@ -192,38 +194,45 @@ public void setSalarioFinal(double salarioFinal1) {
         return Objects.equals(this.salarioFinal, other.salarioFinal);
     }
 //Metodos para la agregacion de disco a cantante
-  public void agregarDisco(int codigo, String nombre, int anioDeLanzamiento) {
-        discografia.add(new Disco(codigo, nombre, anioDeLanzamiento));
-    }
+public void agregarDisco(Disco disco) {
+    discografia.add(disco);
+}
 
-    public void actualizarDisco(int codigo, String nombre, int anioDeLanzamiento) {
-        Disco disco = new Disco(codigo, nombre, anioDeLanzamiento);
-        if (discografia.contains(disco)) {
-            int index = discografia.indexOf(disco);
-            discografia.set(index, disco);
+public void actualizarDisco(int codigo, String nombre, int anioDeLanzamiento) {
+    for (Disco disco : discografia) {
+        if (disco.getCodigo() == codigo) {
+            disco.setNombre(nombre);
+            disco.setAnioDeLanzamiento(anioDeLanzamiento);
+            break;
         }
     }
+}
 
-    public void eliminarDisco(int codigo, String nombre, int anioDeLanzamiento) {
-        Disco disco = new Disco(codigo, nombre, anioDeLanzamiento);
-        if (discografia.contains(disco)) {
-            int index = discografia.indexOf(disco);
-            discografia.remove(index);
+public void eliminarDisco(int codigo) {
+    Disco discoAEliminar = null;
+    for (Disco disco : discografia) {
+        if (disco.getCodigo() == codigo) {
+            discoAEliminar = disco;
+            break;
         }
     }
-
-    public List<Disco> listarDiscos() {
-        return discografia;
+    if (discoAEliminar != null) {
+        discografia.remove(discoAEliminar);
     }
+}
 
-    public Disco buscarDisco(int codigo) {
-        for (Disco disco : discografia) {
-            if (disco.getCodigo() == codigo) {
-                return disco;
-            }
+public List<Disco> listarDiscos() {
+    return discografia;
+}
+
+public Disco buscarDisco(int codigo) {
+    for (Disco disco : discografia) {
+        if (disco.getCodigo() == codigo) {
+            return disco;
         }
-        return null;
-    }   
+    }
+    return null;
+}
     @Override
     public String toString() {
         return "Cantante{" + "nombreArtistico=" + nombreArtistico + ", generoMusical=" + generoMusical + ", numeroDeSencillos=" + numeroDeSencillos + ", numeroDeGiras=" + numeroDeGiras + ", discografia=" + discografia + ", salarioFinal=" + salarioFinal + '}';

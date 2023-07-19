@@ -7,316 +7,215 @@ package ec.edu.ups.edu.practica05_interface.test.Dao;
 import ec.edu.ups.edu.practica05_interface.test.IDao.ICompositorDao;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Cancion;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Compositor;
-
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class CompositorDAO implements ICompositorDao {
-    private static final String FOLDER_NAME = "Administración de Datos Musik UPS";
-    private static final String FILE_NAME = "compositores.dat";
-    private static final String CANCIONES_FILE_NAME = "Canciones.dat";
-    private Set<Integer> compositoresGuardados;
-    private String rutaActual;
-    private List<Compositor> listaCompositores;
+     private String ruta;
 
     public CompositorDAO() {
-        listaCompositores = loadCompositores();
-        rutaActual = "";
-        compositoresGuardados = new HashSet<>();
-        for (Compositor compositor : listaCompositores) {
-            compositoresGuardados.add(compositor.getCodigo());
-        }
+        this.ruta = "compositores.dat";
     }
-
-    public void setRutaActual(String ruta) {
-        rutaActual = ruta;
-    }
-
-    public String getRutaActual() {
-        return rutaActual;
-    }
-
-    private String getFolderPath() {
-        String folderPath = rutaActual + File.separator + FOLDER_NAME;
-        File folder = new File(folderPath);
-
-        // Si la carpeta no existe, se crea
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
-
-        return folderPath;
-    }
-
-    private String getFilePath() {
-        return getFolderPath() + File.separator + FILE_NAME;
-    }
-
-    private String getCancionesFilePath() {
-        return getFolderPath() + File.separator + CANCIONES_FILE_NAME;
-    }
-
-    private List<Compositor> loadCompositores() {
-        List<Compositor> compositores = new ArrayList<>();
-        RandomAccessFile file = null;
-
-        try {
-            file = new RandomAccessFile(getFilePath(), "r");
-            String line;
-            while ((line = file.readLine()) != null) {
-                if (line.startsWith("------Datos compositor")) {
-                    continue; // Saltar la línea de separación
-                }
-                if (!line.contains(":")) {
-                    continue; // Ignorar líneas que no contienen campos válidos
-                }
-                String[] data = line.split(":", 2);
-                String fieldName = data[0].trim();
-                String fieldValue = data[1].trim();
-
-                Compositor compositor = new Compositor(); // Crear el objeto Compositor
-
-                switch (fieldName) {
-                    case "Código":
-                        int codigo = Integer.parseInt(fieldValue);
-                        compositor.setCodigo(codigo);
-                        break;
-                    case "Nombre":
-                        compositor.setNombre(fieldValue);
-                        break;
-                    case "Apellido":
-                        compositor.setApellido(fieldValue);
-                        break;
-                    case "Edad":
-                        int edad = Integer.parseInt(fieldValue);
-                        compositor.setEdad(edad);
-                        break;
-                    case "Nacionalidad":
-                        compositor.setNacionalidad(fieldValue);
-                        break;
-                    case "Número de Composiciones":
-                        int numeroDeComposiciones = Integer.parseInt(fieldValue);
-                        compositor.setNumeroDeComposiciones(numeroDeComposiciones);
-                        break;
-                    case "Salario Final":
-                        double salarioFinal = Double.parseDouble(fieldValue);
-                        compositor.setSalarioFinal(salarioFinal);
-                        break;
-                    case "Canciones Top":
-                        int cancionesTop = Integer.parseInt(fieldValue);
-                        compositor.setCancionesTop(cancionesTop);
-                        break;
-                    // Resto de los campos...
-                }
-
-                compositores.add(compositor); // Agregar el compositor a la lista
-            }
-        } catch (IOException e) {
-            // Manejar excepciones en caso de que el archivo no exista o no se pueda leer
-        } finally {
-            if (file != null) {
-                try {
-                    file.close(); // Cerrar el archivo
-                } catch (IOException e) {
-                    // Manejar excepciones en caso de que no se pueda cerrar el archivo
-                }
-            }
-        }
-
-        return compositores;
-    }
-
-    private void saveCompositores() {
-        RandomAccessFile file = null;
-        try {
-            file = new RandomAccessFile(getFilePath(), "rw");
-            file.setLength(0);
-            for (Compositor compositor : listaCompositores) {
-                file.seek(file.length());
-                file.writeBytes("------Datos compositor " + compositor.getCodigo() + "----------\n");
-                file.writeBytes("Código: " + compositor.getCodigo() + "    \n");
-                file.writeBytes("Nombre: " + compositor.getNombre() + "              \n");
-                file.writeBytes("Apellido: " + compositor.getApellido() + "            \n");
-                file.writeBytes("Edad: " + compositor.getEdad() + "   \n");
-                file.writeBytes("Nacionalidad: " + compositor.getNacionalidad() + "         \n");
-                file.writeBytes("Número de Composiciones: " + compositor.getNumeroDeComposiciones() + " \n");
-                file.writeBytes("Salario Final: " + compositor.getSalarioFinal() + "       \n");
-                file.writeBytes("Canciones Top: " + compositor.getCancionesTop() + "     \n");
-                // Resto de los campos...
-            }
-        } catch (IOException e) {
-            // Manejar excepciones en caso de que no se pueda escribir en el archivo
-        } finally {
-            if (file != null) {
-                try {
-                    file.close(); // Cerrar el archivo
-                } catch (IOException e) {
-                    // Manejar excepciones en caso de que no se pueda cerrar el archivo
-                }
-            }
-        }
-    }
+     
+     
 
     @Override
     public void create(Compositor compositor) {
-        if (compositoresGuardados.contains(compositor.getCodigo())) {
-            update(compositor); // El compositor ya existe, actualizar sus datos
-            return;
+         try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true));
+            writer.write(compositorToString(compositor));
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        listaCompositores.add(compositor);
-        compositoresGuardados.add(compositor.getCodigo());
-        saveCompositores();
     }
 
     @Override
     public Compositor read(int codigo) {
-        Compositor compositor = null;
-        for (Compositor c : listaCompositores) {
-            if (c.getCodigo() == codigo) {
-                compositor = c;
-                break;
+               try {
+            BufferedReader reader = new BufferedReader(new FileReader(ruta));
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                Compositor compositor = stringToCompositor(linea);
+                if (compositor.getCodigo() == codigo) {
+                    reader.close();
+                    return compositor;
+                }
             }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        if (compositor != null) {
-            // Realizar acciones adicionales si es necesario
-        }
-
-        return compositor;
-    }
+    return null;
+}
 
     @Override
     public void update(Compositor compositor) {
-        boolean existeCompositor = false;
-        int index = -1;
-
-        // Verificar si el compositor ya existe en la lista
-        for (int i = 0; i < listaCompositores.size(); i++) {
-            Compositor compositorGuardado = listaCompositores.get(i);
-            if (compositorGuardado.getCodigo() == compositor.getCodigo()) {
-                existeCompositor = true;
-                index = i;
-                break;
+    try {
+            BufferedReader reader = new BufferedReader(new FileReader(ruta));
+            List<String> lineas = new ArrayList<>();
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                Compositor c = stringToCompositor(linea);
+                if (c.getCodigo() == compositor.getCodigo()) {
+                    lineas.add(compositorToString(compositor));
+                } else {
+                    lineas.add(linea);
+                }
             }
-        }
+            reader.close();
 
-        // Si el compositor existe, actualizar sus datos y guardar los cambios
-        if (existeCompositor && index != -1) {
-            listaCompositores.set(index, compositor);
-            saveCompositores();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(ruta));
+            for (String l : lineas) {
+                writer.write(l);
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void delete(int codigo) {
-        Compositor compositorEncontrado = null;
-
-        // Buscar el compositor por código
-        for (Compositor compositor : listaCompositores) {
-            if (compositor.getCodigo() == codigo) {
-                compositorEncontrado = compositor;
-                break;
+       try {
+            BufferedReader reader = new BufferedReader(new FileReader(ruta));
+            List<String> lineas = new ArrayList<>();
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                Compositor compositor = stringToCompositor(linea);
+                if (compositor.getCodigo() != codigo) {
+                    lineas.add(linea);
+                }
             }
-        }
+            reader.close();
 
-        // Si se encontró el compositor, eliminarlo de la lista y guardar los cambios
-        if (compositorEncontrado != null) {
-            listaCompositores.remove(compositorEncontrado);
-            saveCompositores();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(ruta));
+            for (String l : lineas) {
+                writer.write(l);
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
+    }   
 
     @Override
     public List<Compositor> list() {
-        return listaCompositores;
-    }
-
-    // Implementación para Cancion
-    public Compositor buscarPorCancion(String valor) {
-        for (Compositor compositor : listaCompositores) {
-            for (Cancion cancion : compositor.listarCanciones()) {
-                if (cancion.getTitulo().equals(valor)) {
-                    System.out.println(compositor.getNombre() + " " + compositor.getApellido());
-                    return compositor;
-                }
+              List<Compositor> listaCantantes = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(ruta));
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                Compositor compositor = stringToCompositor(linea);
+                listaCantantes.add(compositor);
             }
-        }
-        return null;
-    }
-
-    private void saveCanciones() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getCancionesFilePath()))) {
-            for (Compositor compositor : listaCompositores) {
-                for (Cancion cancion : compositor.listarCanciones()) {
-                    writer.write("_________________________datos de cancion " + cancion.getCodigo() + "______________________");
-                    writer.newLine();
-                    writer.write("---------datos de Compositor-------");
-                    writer.newLine();
-                    writer.write("nombre: " + compositor.getNombre());
-                    writer.newLine();
-                    writer.write("apellido: " + compositor.getApellido());
-                    writer.newLine();
-                    writer.write("edad: " + compositor.getEdad());
-                    writer.newLine();
-                    writer.write("---------datos de cancion--------");
-                    writer.newLine();
-                    writer.write("código: " + cancion.getCodigo());
-                    writer.newLine();
-                    writer.write("titulo: " + cancion.getTitulo());
-                    writer.newLine();
-                    writer.write("letra: " + cancion.getLetra());
-                    writer.newLine();
-                    writer.write("tiempo en minutos: " + cancion.getTiempoEnMinutos());
-                    writer.newLine();
-                }
-            }
+            reader.close();
         } catch (IOException e) {
-            // Manejar excepciones en caso de que no se pueda escribir en el archivo
+            e.printStackTrace();
         }
+        return listaCantantes;
     }
-
+    
+    
+    
+  
     @Override
     public void createCancion(Compositor compositor, int codigo, String titulo, String letra, double tiempoEnMinutos) {
         compositor.agregarCancion(codigo, titulo, letra, tiempoEnMinutos);
-        saveCanciones();
     }
 
     @Override
     public Cancion readCancion(Compositor compositor, int codigo) {
-        Cancion cancion = compositor.buscarCancion(codigo);
-        if (cancion != null) {
-            // Realizar acciones adicionales si es necesario
-        }
-        return cancion;
+        return compositor.buscarCancion(codigo);
     }
 
     @Override
     public void updateCancion(Compositor compositor, int codigo, String titulo, String letra, double tiempoEnMinutos) {
-        Cancion cancion = compositor.buscarCancion(codigo);
-        if (cancion != null) {
-            cancion.setTitulo(titulo);
-            cancion.setLetra(letra);
-            cancion.setTiempoEnMinutos(tiempoEnMinutos);
-            saveCanciones();
-        }
+        compositor.actualizarCancion(codigo, titulo, letra, tiempoEnMinutos);
     }
 
     @Override
     public void deleteCancion(Compositor compositor, int codigo, String titulo, String letra, double tiempoEnMinutos) {
-        compositor.eliminarCancion(codigo, titulo, letra, tiempoEnMinutos);
-        saveCanciones();
+       compositor.eliminarCancion(codigo, titulo, letra, tiempoEnMinutos);
     }
 
     @Override
     public List<Cancion> findAllCanciones(Compositor compositor) {
         return compositor.listarCanciones();
+    } 
+    
+  //Metodos para funcionamiento de CRUD
+   private String compositorToString(Compositor compositor) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(compositor.getCodigo()).append(",")
+                .append(compositor.getNombre()).append(",")
+                .append(compositor.getApellido()).append(",")
+                .append(compositor.getEdad()).append(",")
+                .append(compositor.getNacionalidad()).append(",")
+                .append(compositor.getSalario()).append(",")
+                .append(compositor.getSalarioFinal()).append(",")
+                .append(compositor.getCancionesTop()).append(",");
+        
+        List<Cancion> canciones = compositor.getCancionesCompositor();
+        if (canciones != null && !canciones.isEmpty()) {
+            sb.append("[");
+            for (Cancion cancion : canciones) {
+                sb.append(cancionToString(cancion)).append(";");
+            }
+            sb.append("]");
+        }
+        
+        return sb.toString();
     }
+   
+   private Compositor stringToCompositor(String linea) {
+        String[] partes = linea.split(",");
+        int codigo = Integer.parseInt(partes[0]);
+        String nombre = partes[1];
+        String apellido = partes[2];
+        int edad = Integer.parseInt(partes[3]);
+        String nacionalidad = partes[4];
+        double salario = Double.parseDouble(partes[5]);
+        double salarioFinal=Double.parseDouble(partes[6]);
+        int cancionesTop=Integer.parseInt(partes[7]);
+ 
+        Compositor compositor = new Compositor(salarioFinal, cancionesTop, codigo, nombre, apellido, edad, nacionalidad, salario);
+        
+        if (partes.length > 8) {
+            String ComposicionesStr = partes[8];
+            ComposicionesStr = ComposicionesStr.substring(1,ComposicionesStr.length() - 1);
+            String[] discos = ComposicionesStr.split(";");
+            
+            for (String cancionStr : discos) {
+                Cancion cancion = stringToCancion(cancionStr);
+                compositor.getCancionesCompositor().add(cancion);
+            }
+        }
+        
+        return compositor;
+    }
+   
+   private String cancionToString(Cancion cancion) {
+        return cancion.getCodigo() + ":" + cancion.getTitulo() + ":" + cancion.getLetra()+ ":" + cancion.getTiempoEnMinutos();
+    }
+    
+    private Cancion stringToCancion(String cancionStr) {
+        String[] partes = cancionStr.split(":");
+        int codigo = Integer.parseInt(partes[0]);
+        String titulo = partes[1];
+        String letra = partes[2];
+        double tiempo =Double.parseDouble(partes[3]);
+        return new Cancion(codigo,titulo,letra,tiempo);
+    }
+
+
+
 }

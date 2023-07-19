@@ -169,7 +169,7 @@
                       <Component id="BtnAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace pref="8" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -262,21 +262,25 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabelG" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelD" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelS" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSencillos" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtDiscos" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtGiras" alignment="0" min="-2" pref="337" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtSueldoFinal" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
-                          <Component id="jLabelf" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="BtnCalcular" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelD" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtDiscos" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabelG" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelS" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSencillos" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtGiras" alignment="0" pref="337" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtSueldoFinal" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
+                                  <Component id="jLabelf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtnCalcular" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace pref="45" max="32767" attributes="0"/>
                   </Group>
@@ -291,29 +295,28 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtSencillos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtSueldoFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelD" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtSueldoFinal" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                       <Component id="BtnCalcular" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtDiscos" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Component id="jLabelG" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtGiras" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Component id="jLabelf" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelG" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtGiras" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabelD" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtDiscos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -348,6 +351,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDiscos">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtGiras">
             </Component>
@@ -357,6 +363,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSueldoFinal">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

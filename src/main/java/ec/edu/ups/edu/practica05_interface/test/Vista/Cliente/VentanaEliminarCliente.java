@@ -284,7 +284,7 @@ public class VentanaEliminarCliente extends javax.swing.JInternalFrame {
             String nacionalidad = compositor.getNacionalidad();
             String apellido = compositor.getApellido();
             String salario = String.valueOf(compositor.getSalarioFinal());
-            String numComposiciones = String.valueOf(compositor.getNumeroDeComposiciones());
+            String numComposiciones = String.valueOf(compositor.getCancionesCompositor());
             Object[] rowData = {codigo, nombre, apellido, edad, nacionalidad, salario, numComposiciones};
             modelo.addRow(rowData);
 

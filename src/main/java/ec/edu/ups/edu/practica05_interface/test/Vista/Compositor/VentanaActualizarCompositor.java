@@ -257,7 +257,7 @@ try {
         txtNacionalidad.setText(compositor.getNacionalidad());
         txtEdad.setText(String.valueOf(compositor.getEdad()));
         txtSalario.setText(String.valueOf(compositor.getSalario()));
-        txtComposiciones.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
+       txtComposiciones.setText(String.valueOf(compositor.getCancionesCompositor()));
         txtTop.setText(String.valueOf(compositor.getCancionesTop()));
     } else {
      JOptionPane.showMessageDialog(this, mensajes.getString("mensajeBuscar"));
@@ -278,8 +278,12 @@ try {
     int edad = Integer.parseInt(txtEdad.getText());
     String nacionalidad = txtNacionalidad.getText();
     double salario = Double.parseDouble(txtSalario.getText());
-    int composiciones = Integer.parseInt(txtComposiciones.getText());
     int cancionesTop = Integer.parseInt(txtTop.getText());
+    
+       Compositor singer = new Compositor();
+    List<Cancion> composicion = singer.getCancionesCompositor();
+    int composiciones = (composicion != null) ? composicion.size() : 0;
+    txtComposiciones.setText(String.valueOf(composiciones));
 
     Compositor compositor = new Compositor();
     compositor.setNombre(nombre);
@@ -288,7 +292,7 @@ try {
     compositor.setEdad(edad);
     compositor.setNacionalidad(nacionalidad);
     compositor.setSalario(salario);
-    compositor.setNumeroDeComposiciones(composiciones);
+    compositor.setCancionesCompositor(composicion);
     compositor.setCancionesTop(cancionesTop);
     
     calcularSalarioFinal(compositor);

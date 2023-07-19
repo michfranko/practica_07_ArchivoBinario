@@ -350,7 +350,7 @@ private CompositorControlador compositorControlador;
 
                 txtApellido.setText(compositor.getApellido());
                 txtNombre.setText(compositor.getNombre());
-                txtNumComposicion.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
+                txtNumComposicion.setText(String.valueOf(compositor.getCancionesCompositor()));
                 BtnAceptar.setEnabled(true);
 
             } else {

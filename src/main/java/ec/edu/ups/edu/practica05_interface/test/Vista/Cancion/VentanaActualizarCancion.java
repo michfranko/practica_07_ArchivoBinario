@@ -351,7 +351,7 @@ private CompositorControlador controladorCompositor;
             if (compositor != null) {
                 txtApellido.setText(compositor.getApellido());
                 txtNombre.setText(compositor.getNombre());
-                txtNumComposiciones.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
+                txtNumComposiciones.setText(String.valueOf(compositor.getCancionesCompositor()));
                 BtnAceptar.setEnabled(true);
 
             } else {

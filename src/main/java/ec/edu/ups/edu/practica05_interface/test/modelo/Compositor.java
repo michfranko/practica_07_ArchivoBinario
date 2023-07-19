@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Compositor extends Persona {
-    private int numeroDeComposiciones;
     private Double salarioFinal;
     private int cancionesTop;
      private List<Cancion> cancionesCompositor;
@@ -20,11 +19,19 @@ public class Compositor extends Persona {
 
     public Compositor(int codigo, String nombre, String apellido, int edad, String nacionalidad, double salario,double salarioFinal) {
         super(codigo, nombre, apellido, edad, nacionalidad, salario);
-        this.numeroDeComposiciones = 0;
         this.cancionesTop = 0;
         cancionesCompositor = new ArrayList<>();
         this.clientes = new ArrayList<>();
     }
+
+    public Compositor(Double salarioFinal, int cancionesTop, int codigo, String nombre, String apellido, int edad, String nacionalidad, double salario) {
+        super(codigo, nombre, apellido, edad, nacionalidad, salario);
+        this.salarioFinal = salarioFinal;
+        this.cancionesTop = cancionesTop;
+        cancionesCompositor= new ArrayList<>();
+    }
+    
+    
 
     public Compositor() {
         cancionesCompositor= new ArrayList<>();
@@ -39,6 +46,14 @@ public class Compositor extends Persona {
         this.cancionesTop = cancionesTop;
     }
 
+    public List<Cancion> getCancionesCompositor() {
+        return cancionesCompositor;
+    }
+
+    public void setCancionesCompositor(List<Cancion> cancionesCompositor) {
+        this.cancionesCompositor = cancionesCompositor;
+    }
+
     
     
     public Double getSalarioFinal() {
@@ -49,15 +64,6 @@ public class Compositor extends Persona {
         this.salarioFinal = salarioFinal;
     }
         
-
-    public int getNumeroDeComposiciones() {
-        return numeroDeComposiciones;
-    }
-
-    public void setNumeroDeComposiciones(int numeroDeComposiciones) {
-        this.numeroDeComposiciones = numeroDeComposiciones;
-    }
-
 
     public List<Cantante> getClientes() {
         return clientes;
@@ -117,7 +123,7 @@ public class Compositor extends Persona {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
         return hash;
     }
 
@@ -133,17 +139,20 @@ public class Compositor extends Persona {
             return false;
         }
         final Compositor other = (Compositor) obj;
-        if (this.numeroDeComposiciones != other.numeroDeComposiciones) {
+        if (this.cancionesTop != other.cancionesTop) {
             return false;
         }
         if (!Objects.equals(this.salarioFinal, other.salarioFinal)) {
             return false;
         }
-        if (!Objects.equals(this.cancionesTop, other.cancionesTop)) {
+        if (!Objects.equals(this.cancionesCompositor, other.cancionesCompositor)) {
             return false;
         }
         return Objects.equals(this.clientes, other.clientes);
     }
+
+   
+   
 
     // Metodo para agergar canciones a compositor
     public void agregarCancion(int codigo, String titulo, String letra, double tiempoEnMinutos) {
@@ -218,7 +227,7 @@ public class Compositor extends Persona {
     
     @Override
     public String toString() {
-        return "Compositor{" + "numeroDeComposiciones=" + numeroDeComposiciones + ", salarioFinal=" + salarioFinal + ", cancionesTop=" + cancionesTop + ", clientes=" + clientes + '}';
+        return "Compositor{" + ", salarioFinal=" + salarioFinal + ", cancionesTop=" + cancionesTop + ", clientes=" + clientes + '}';
     }
     
 }

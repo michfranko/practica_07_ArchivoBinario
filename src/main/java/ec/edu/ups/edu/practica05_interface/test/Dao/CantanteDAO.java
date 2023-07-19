@@ -18,7 +18,7 @@ public class CantanteDAO implements ICantanteDao {
     private String ruta;
 
     public CantanteDAO() {
-        this.ruta = "cantantes.txt";
+        this.ruta = "cantantes.dat";
     }
 
     @Override
@@ -122,9 +122,9 @@ public class CantanteDAO implements ICantanteDao {
     }
 
 
-     @Override
+ @Override
     public void createDisco(Cantante cantante, int codigo, String nombre, int anioDeLanzamiento) {
-        cantante.agregarDisco(codigo, nombre, anioDeLanzamiento);
+        cantante.agregarDisco(new Disco(codigo, nombre, anioDeLanzamiento));
         update(cantante);
     }
 
@@ -140,16 +140,15 @@ public class CantanteDAO implements ICantanteDao {
     }
 
     @Override
-    public void deleteDisco(Cantante cantante, int codigo, String nombre, int anioDeLanzamiento) {
-        cantante.eliminarDisco(codigo, nombre, anioDeLanzamiento);
+    public void deleteDisco(Cantante cantante, int codigo,String nombre, int anioDeLanzamiento) {
+        cantante.eliminarDisco(codigo);
         update(cantante);
     }
 
     @Override
     public List<Disco> findAllDisco(Cantante cantante) {
-        return cantante.listarDiscos();
+        return cantante.getDiscografia();
     }
-
    
 //Metodos funcionamiento CRUD
         private String cantanteToString(Cantante cantante) {

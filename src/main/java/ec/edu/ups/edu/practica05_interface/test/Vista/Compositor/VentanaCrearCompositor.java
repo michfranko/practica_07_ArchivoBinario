@@ -5,7 +5,9 @@
 package ec.edu.ups.edu.practica05_interface.test.Vista.Compositor;
 
 import ec.edu.ups.edu.practica05_interface.test.controlador.CompositorControlador;
+import ec.edu.ups.edu.practica05_interface.test.modelo.Cancion;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Compositor;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
@@ -147,6 +149,7 @@ public class VentanaCrearCompositor extends javax.swing.JInternalFrame {
 
         LabelCT.setText("Numero de canciones Top");
 
+        txtComposiciones.setEnabled(false);
         txtComposiciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtComposicionesActionPerformed(evt);
@@ -155,17 +158,19 @@ public class VentanaCrearCompositor extends javax.swing.JInternalFrame {
 
         Labelt.setText("Salario final:");
 
+        txtSueldoFinal.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LabelCT)
+                    .addComponent(txtTop, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelC)
-                    .addComponent(txtComposiciones)
-                    .addComponent(txtTop, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtComposiciones, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -180,26 +185,28 @@ public class VentanaCrearCompositor extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(LabelC)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtComposiciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Labelt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSueldoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(43, 43, 43)
+                        .addComponent(Labelt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSueldoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(LabelCT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(BtnCalcular)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addComponent(BtnCalcular))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(LabelC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtComposiciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -325,9 +332,12 @@ public class VentanaCrearCompositor extends javax.swing.JInternalFrame {
     int edad = Integer.parseInt(txtEdad.getText());
     String nacionalidad = txtNacionalidad.getText();
     double salario = Double.parseDouble(txtSalario.getText());
-    int composiociones = Integer.parseInt(txtComposiciones.getText());
     int top =Integer.parseInt(txtTop.getText());
     
+    Compositor singer = new Compositor();
+    List<Cancion> composicion = singer.getCancionesCompositor();
+    int composiciones = (composicion != null) ? composicion.size() : 0;
+    txtComposiciones.setText(String.valueOf(composiciones));
 
     Compositor compositor = new Compositor();
     compositor.setNombre(nombre);
@@ -336,7 +346,7 @@ public class VentanaCrearCompositor extends javax.swing.JInternalFrame {
     compositor.setEdad(edad);
     compositor.setNacionalidad(nacionalidad);
     compositor.setSalario(salario);
-    compositor.setNumeroDeComposiciones(composiociones);
+    compositor.setCancionesCompositor(composicion);
     compositor.setCancionesTop(top);
     
     calcularSalarioFinal(compositor);
@@ -352,13 +362,15 @@ public class VentanaCrearCompositor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtComposicionesActionPerformed
 
     private void BtnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCalcularActionPerformed
-    int cantidadComposiciones = Integer.parseInt(txtComposiciones.getText());
+    Compositor compos = new Compositor();
     int cancionestop100 = Integer.parseInt(txtTop.getText());
+    List<Cancion> composiciones = compos.getCancionesCompositor();
     double salario = Double.parseDouble(txtSalario.getText());
-
+    int cantidadComposiciones = (composiciones != null) ? composiciones.size() : 0;
     double salarioFinal = calculateFinalSalario(cantidadComposiciones, cancionestop100, salario);
 
     txtSueldoFinal.setText(String.valueOf(salarioFinal));
+    txtComposiciones.setText(String.valueOf(cantidadComposiciones));
     txtSueldoFinal.setEnabled(false);
 }
 
