@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompositorDAO implements ICompositorDao {
-     private String ruta;
+    private List<Compositor> listaCompositores;
+    private String ruta;
 
     public CompositorDAO() {
         this.ruta = "compositores.dat";
+        listaCompositores = new ArrayList<>();
     }
      
      
@@ -215,7 +217,6 @@ public class CompositorDAO implements ICompositorDao {
         double tiempo =Double.parseDouble(partes[3]);
         return new Cancion(codigo,titulo,letra,tiempo);
     }
-
-
-
+    
+  
 }

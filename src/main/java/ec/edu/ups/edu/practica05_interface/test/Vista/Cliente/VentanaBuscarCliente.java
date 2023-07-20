@@ -53,7 +53,7 @@ public class VentanaBuscarCliente extends javax.swing.JInternalFrame {
         jLabel18.setText(mensajes.getString("txtDiscos"));
         jLabel17.setText(mensajes.getString("txtGiras"));
         jLabel16.setText(mensajes.getString("txtSalarioF"));   
-        btnBuscar.setText(mensajes.getString("actualizar"));
+        btnBuscar.setText(mensajes.getString("buscar"));
         btnSalir.setText(mensajes.getString("salir"));
         BtnCancelar.setText(mensajes.getString("BtnCancelar"));
         btnAceptar.setText(mensajes.getString("BtnAceptar"));
@@ -299,20 +299,21 @@ public class VentanaBuscarCliente extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtApellido))
+                                .addGap(56, 56, 56)
+                                .addComponent(btnAceptar)
+                                .addGap(71, 71, 71)
+                                .addComponent(btnSalir))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(txtNombre)
+                                        .addComponent(txtApellido))
+                                    .addComponent(txtNumComposiciones, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAceptar)
-                                    .addComponent(BtnCancelar)))
-                            .addComponent(txtNumComposiciones, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(btnBuscar)
-                                .addGap(84, 84, 84)
-                                .addComponent(btnSalir)))
+                                    .addComponent(BtnCancelar)
+                                    .addComponent(btnBuscar))))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -358,17 +359,16 @@ public class VentanaBuscarCliente extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAceptar))
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -382,10 +382,17 @@ public class VentanaBuscarCliente extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8)
                             .addComponent(txtNumComposiciones, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(15, 15, 15))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnBuscar)
+                                .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(txtNombreCantante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -430,8 +437,8 @@ public class VentanaBuscarCliente extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel18)
-                                .addComponent(btnBuscar)
-                                .addComponent(btnSalir))
+                                .addComponent(btnSalir)
+                                .addComponent(btnAceptar))
                             .addComponent(cbxDiscos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -566,15 +573,18 @@ public class VentanaBuscarCliente extends javax.swing.JInternalFrame {
 
     }
 
-    private void cargarDatosCombo() {
-        DefaultComboBoxModel<Cantante> modelo = (DefaultComboBoxModel) cbxCliente.getModel();
-        Compositor compositor = this.controladorCompositor.buscar(Integer.parseInt(txtCodigo.getText()));
-        modelo.removeAllElements();
-        List<Cantante> listaCantantes = compositor.listarCantantes();
+   private void cargarDatosCombo() {
+     DefaultComboBoxModel<Cantante>modelo=(DefaultComboBoxModel)cbxCliente.getModel();
+    Compositor compositor = this.controladorCompositor.buscar(Integer.parseInt(txtCodigo.getText()));
+    modelo.removeAllElements();
+    List<Cantante> listaCantantes = compositor.listarCantantes();
 
-        for (Cantante cantante : listaCantantes) {
-            modelo.addElement(cantante);
-        }
+    for (Cantante cantante : listaCantantes) {
+        modelo.addElement(cantante);
+    }
+    
+    // Verificar si hay un cantante seleccionado en el ComboBox antes de acceder a sus atributos
+    if (modelo.getSelectedItem() != null) {
         Cantante cantante = (Cantante) modelo.getSelectedItem();
         txtNombreCantante.setText(cantante.getNombre());
         txtApellidoCantante.setText(cantante.getApellido());
@@ -586,14 +596,16 @@ public class VentanaBuscarCliente extends javax.swing.JInternalFrame {
         txtSalarioF.setText(String.valueOf(cantante.getSalarioFinal()));
         txtNumGiras.setText(String.valueOf(cantante.getNumeroDeGiras()));
         txtNumSencillos.setText(String.valueOf(cantante.getNumeroDeSencillos()));
-        DefaultComboBoxModel<String> modeloDisco = (DefaultComboBoxModel) cbxDiscos.getModel();
+        
+        DefaultComboBoxModel<String> modeloDisco = (DefaultComboBoxModel<String>) cbxDiscos.getModel();
         modeloDisco.removeAllElements();
         List<Disco> listaDiscos = controladorCantante.listarDiscos(cantante);
-        for(Disco disco: listaDiscos){
+        for (Disco disco : listaDiscos) {
             modeloDisco.addElement(disco.getNombre());
         }
     }
-    
+}
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

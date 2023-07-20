@@ -9,12 +9,18 @@ import ec.edu.ups.edu.practica05_interface.test.IDao.ICompositorDao;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Cancion;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Cantante;
 import ec.edu.ups.edu.practica05_interface.test.modelo.Compositor;
+import ec.edu.ups.edu.practica05_interface.test.modelo.Disco;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 
 public class CompositorControlador {
     private Compositor compositor;
     private Cantante cantante;
+    private String ruta;
+
     
     private ICompositorDao compositorDAO;
     private ICantanteDao cantanteDAO;
@@ -22,6 +28,7 @@ public class CompositorControlador {
     public CompositorControlador(ICompositorDao compositorDAO) {        
         this.compositorDAO = compositorDAO;
         this.cantanteDAO = cantanteDAO;
+        this.ruta = "compositor.dat";
     }
     
     public void crear(Compositor compositor){
@@ -53,39 +60,6 @@ public class CompositorControlador {
         return compositorDAO.list();
     }
     
-    //metodo para cantante
-    public void agregarCliente(Compositor compositor, Cantante cantante) {
-        this.compositor = compositor;
-        this.cantante = cantante;
-
-        this.compositor.agregarCliente(this.cantante);
-        compositorDAO.update(this.compositor);
-    }
-
-    public void eliminarCliente(Compositor compositor, Cantante cantante) {
-        this.compositor = compositor;
-        this.cantante = cantante;
-        this.compositor.eliminarCliente(this.cantante);
-        compositorDAO.update(this.compositor);
-    }
-
-    public List<Cantante> listarCantantes(Compositor compositor) {
-
-        this.compositor = compositor;
-        return this.compositor.listarCantantes();
-    }
-
-    public void actualizarCliente(Compositor compositor, Cantante cantanteAnterior, Cantante cantanteNuevo) {
-        this.compositor = compositor;
-        this.eliminarCliente(this.compositor, cantanteAnterior);
-        this.agregarCliente(this.compositor, cantanteNuevo);
-    }
-
-    public Cantante buscarCantante(Compositor compositor, int codigo) {
-        this.compositor = compositor;
-        return this.compositor.buscarCantante(codigo);
-    }
-
     //metodos para canciones
     public void agregarCancion(Compositor compositor, int codigo, String titulo, String letra, double tiempoEnMinutos) {
         this.compositor = compositor;
@@ -128,7 +102,41 @@ public class CompositorControlador {
         return compositorDAO.findAllCanciones(this.compositor);
     }
     
+      //metodo para cantante
+  public void agregarCliente(Compositor compositor, Cantante cantante) {
+        this.compositor = compositor;
+        this.cantante = cantante;
 
+        this.compositor.agregarCliente(this.cantante);
+        compositorDAO.update(this.compositor);
+    }
+  
+  
+
+    public void eliminarCliente(Compositor compositor, Cantante cantante) {
+        this.compositor = compositor;
+        this.cantante = cantante;
+        this.compositor.eliminarCliente(this.cantante);
+        compositorDAO.update(this.compositor);
+    }
+
+    public List<Cantante> listarCantantes(Compositor compositor) {
+
+        this.compositor = compositor;
+        return this.compositor.listarCantantes();
+    }
+
+    public void actualizarCliente(Compositor compositor, Cantante cantanteAnterior, Cantante cantanteNuevo) {
+        this.compositor = compositor;
+        this.eliminarCliente(this.compositor, cantanteAnterior);
+        this.agregarCliente(this.compositor, cantanteNuevo);
+    }
+
+    public Cantante buscarCantante(Compositor compositor, int codigo) {
+        this.compositor = compositor;
+        return this.compositor.buscarCantante(codigo);
+    }
+    
 
 }
 

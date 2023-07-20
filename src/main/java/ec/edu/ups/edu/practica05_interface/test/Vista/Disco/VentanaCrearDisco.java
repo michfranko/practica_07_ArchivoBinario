@@ -392,7 +392,8 @@ public class VentanaCrearDisco extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "NO DATA :( ");
         }
-
+       limpiarCamposCantante();
+       limpiarCamposDisco();
     }//GEN-LAST:event_BtnRegistrarActionPerformed
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed

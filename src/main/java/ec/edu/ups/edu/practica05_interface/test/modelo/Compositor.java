@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ec.edu.ups.edu.practica05_interface.test.modelo;
-
-import java.util.ArrayList;
-import java.util.List;
+import ec.edu.ups.edu.practica05_interface.test.Dao.CompositorDAO;
 import java.util.Objects;
 
 import java.util.ArrayList;
@@ -16,27 +14,24 @@ public class Compositor extends Persona {
     private int cancionesTop;
      private List<Cancion> cancionesCompositor;
     private List<Cantante> clientes;
-
-    public Compositor(int codigo, String nombre, String apellido, int edad, String nacionalidad, double salario,double salarioFinal) {
-        super(codigo, nombre, apellido, edad, nacionalidad, salario);
-        this.cancionesTop = 0;
-        cancionesCompositor = new ArrayList<>();
-        this.clientes = new ArrayList<>();
-    }
+     
 
     public Compositor(Double salarioFinal, int cancionesTop, int codigo, String nombre, String apellido, int edad, String nacionalidad, double salario) {
         super(codigo, nombre, apellido, edad, nacionalidad, salario);
         this.salarioFinal = salarioFinal;
         this.cancionesTop = cancionesTop;
         cancionesCompositor= new ArrayList<>();
+        this.clientes = new ArrayList<>();
+       
     }
-    
-    
 
     public Compositor() {
-        cancionesCompositor= new ArrayList<>();
-        clientes = new ArrayList<>();
-    }
+      this.cancionesCompositor = new ArrayList<>();
+       this.clientes = new ArrayList<>();
+     
+   }
+
+
 
     public int getCancionesTop() {
         return cancionesTop;

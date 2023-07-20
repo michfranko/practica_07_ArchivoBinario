@@ -394,6 +394,7 @@ private ResourceBundle mensajes;
                 } 
             } 
         } 
+         limpiarCamposDisco();
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
@@ -437,6 +438,8 @@ private ResourceBundle mensajes;
         } else {
             JOptionPane.showMessageDialog(this, mensajes.getString("mensajeNOActualizar"));
         }
+        limpiarCamposCantante();
+        limpiarCamposDisco();
     }//GEN-LAST:event_BtnActualizarActionPerformed
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
