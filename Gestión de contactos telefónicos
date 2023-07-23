@@ -1,0 +1,6 @@
+ #Informe Practica Gestión de contactos telefónicos
+
+#Descripcion
+Se necesita desarrollar un programa para gestionar una lista de contactos telefónicos.
+Cada contacto tiene un nombre, un número de teléfono, una Coleccion de Correos y 
+un Diccionario que almacenara las redes sociales del contacto 
